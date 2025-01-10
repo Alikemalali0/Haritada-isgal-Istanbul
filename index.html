@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotoğraf Eklemeli Harita</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.5rem;
+            font-family: Arial, sans-serif;
+        }
+
+        #map {
+            width: 100%;
+            height: calc(100% - 60px); /* Harita alanı: toplam yükseklikten başlık yüksekliği çıkar */
+        }
+
+        .custom-marker {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .big-note {
+            width: 300px;
+            height: 150px;
+        }
+    </style>
+    <!-- Leaflet Harita Kütüphanesi -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+</head>
+<body>
+    <header>
+        İstanbul Haritası - Fotoğraf Eklemeli Not Sistemi
+    </header>
+    <div id="map"></div>
+    <script>
+        // Harita Oluşturma
+        var map = L.map('map').setView([41.0082, 28.9784], 10); // İstanbul koordinatları
+
+        // Harita Katmanı
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> Katılımcıları',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Yuvarlak İşaretçi
+        var customIcon = L.divIcon({
+            className: 'custom-marker',
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+        });
+
+        // İşaretçi Konumları
+        var locations = [
+            { name: "Kadıköy", coords: [40.9901, 29.0271], image: "https://i.imgur.com/r63HXJJ.jpeg" },
+            { name: "Harbiye Nezareti", coords: [41.0342, 28.9850], image: "https://imgur.com/mynIKni.jpeg" },
+            { name: "Şehzadebaşı Karakolu", coords: [41.0130, 28.9618], image: "https://imgur.com/2pEmYa4.jpeg" },
+            { name: "Sarayburnu", coords: [41.0110, 28.9830], image: "https://imgur.com/XhzcgDr.jpeg" },
+            { name: "Üsküdar", coords: [41.0257, 29.0158], image: null },
+            { name: "Haliç Tersanesi", coords: [41.0415, 28.9468], image: "https://imgur.com/ZUgfELM.jpeg" },
+            { name: "Pendik Tersanesi", coords: [40.8674, 29.2715], image: "https://imgur.com/Ijp5m3C.jpeg" }
+        ];
+
+        // Popup İçerikleri
+        function generatePopupContent(location) {
+            var imageContent = location.image ? `<img src="${location.image}" alt="${location.name}" style="width: 100%; height: auto; border: 1px solid #ccc; margin-bottom: 10px;">` : "";
+            return `
+                <div>
+                    ${imageContent}
+                    <label for="short-note">Kısa Not:</label><br>
+                    <input type="text" id="short-note" placeholder="Notunuzu yazın"><br><br>
+                    <a href="#" id="more-link">Daha Fazla Göster</a>
+                </div>
+            `;
+        }
+
+        function generateLargePopupContent(location) {
+            var imageContent = location.image ? `<img src="${location.image}" alt="${location.name}" style="width: 100%; height: auto; border: 1px solid #ccc; margin-bottom: 10px;">` : "";
+            return `
+                <div>
+                    ${imageContent}
+                    <label for="large-note">Geniş Not Alanı:</label><br>
+                    <textarea id="large-note" class="big-note" placeholder="Daha fazla detay yazın"></textarea><br><br>
+                    <button onclick="alert('Not Kaydedildi!')">Kaydet</button>
+                    <br><br>
+                    <a href="#" id="back-link">Geri Gel</a>
+                </div>
+            `;
+        }
+
+        // İşaretçileri Ekle
+        locations.forEach(function(location) {
+            var marker = L.marker(location.coords, { icon: customIcon }).addTo(map);
+            var smallPopup = generatePopupContent(location);
+            var largePopup = generateLargePopupContent(location);
+
+            marker.bindPopup(smallPopup);
+
+            marker.on('popupopen', function() {
+                document.getElementById('more-link')?.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    marker.unbindPopup();
+                    marker.bindPopup(largePopup).openPopup();
+                    setBackLinkListener(marker, smallPopup);
+                });
+            });
+
+            marker.on('popupclose', function() {
+                marker.unbindPopup();
+                marker.bindPopup(smallPopup);
+            });
+        });
+
+        // Geri Gel Bağlantısını Ayarla
+        function setBackLinkListener(marker, smallPopup) {
+            document.getElementById('back-link')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                marker.unbindPopup();
+                marker.bindPopup(smallPopup).openPopup();
+            });
+        }
+    </script>
+</body>
+</html>
