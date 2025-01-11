@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fotoğraf Eklemeli Harita</title>
+    <title>Haritada İşgal: İstanbul</title>
     <style>
         body, html {
             margin: 0;
@@ -45,7 +45,7 @@
 </head>
 <body>
     <header>
-        İstanbul Haritası - Fotoğraf Eklemeli Not Sistemi
+        İstanbul İşgal Haritası
     </header>
     <div id="map"></div>
     <script>
@@ -61,19 +61,154 @@
         // Yuvarlak İşaretçi
         var customIcon = L.divIcon({
             className: 'custom-marker',
-            iconSize: [20, 20],
+            iconSize: [15, 15],
             iconAnchor: [10, 10]
         });
 
-        // İşaretçi Konumları
+        // İşaretçi Konumları ve Metinler
         var locations = [
-            { name: "Kadıköy", coords: [40.9901, 29.0271], image: "https://i.imgur.com/r63HXJJ.jpeg" },
-            { name: "Harbiye Nezareti", coords: [41.0342, 28.9850], image: "https://imgur.com/mynIKni.jpeg" },
-            { name: "Şehzadebaşı Karakolu", coords: [41.0130, 28.9618], image: "https://imgur.com/2pEmYa4.jpeg" },
-            { name: "Sarayburnu", coords: [41.0110, 28.9830], image: "https://imgur.com/XhzcgDr.jpeg" },
-            { name: "Üsküdar", coords: [41.0257, 29.0158], image: null },
-            { name: "Haliç Tersanesi", coords: [41.0415, 28.9468], image: "https://imgur.com/ZUgfELM.jpeg" },
-            { name: "Pendik Tersanesi", coords: [40.8674, 29.2715], image: "https://imgur.com/Ijp5m3C.jpeg" }
+            {
+                name: "Harbiye Nezareti",
+                coords: [41.0448, 28.9872],
+                image: "https://imgur.com/mynIKni.jpeg",
+                shortText: "İstanbul’un işgal dönemi sırasında Harbiye Nezareti (Savunma Bakanlığı), Osmanlı askeri teşkilatının kalbi olarak kritik bir rol oynadı. İşgal güçleri, Harbiye Nezareti’ni etkisiz hale getirmek için baskılar uyguladı ve birçok Osmanlı subayı tutuklanarak sürgüne gönderildi. Bu süreçte, millî direniş hareketlerinin temelleri atılmış ve Harbiye Nezareti'nin içindeki bazı subaylar, Anadolu’daki mücadeleyi destekleyecek bilgi ve insan kaynağını gizlice organize etmiştir. Ancak işgal güçlerinin baskısı, kurumun hareket alanını büyük ölçüde kısıtladı.",
+                longText: `İstanbul’un işgal edildiği 16 Mart 1920 sonrasında Harbiye Nezareti, Osmanlı İmparatorluğu'nun askeri yönetim merkezi olarak hem işgal güçlerinin baskısı hem de millî direnişin desteklenmesi açısından önemli bir döneme tanıklık etti. İşgal güçleri, Osmanlı ordusunu tamamen etkisiz hale getirmek amacıyla Harbiye Nezareti üzerindeki baskısını artırdı. Birçok subay görevden alındı, tutuklandı ya da Malta’ya sürgüne gönderildi. Bunun yanı sıra, nezaretteki belgeler ve askeri sırlar işgal güçlerinin eline geçti.
+
+Ancak bu zorlu dönemde Harbiye Nezareti, Millî Mücadele'nin organizasyonunda kritik bir rol oynadı. Mustafa Kemal Paşa ve silah arkadaşları, Anadolu’daki hareketin planlarını bu baskılara rağmen sürdürebilmek için gizli bir ağ kurdular. Harbiye Nezareti’nden gönderilen subaylar ve askeri malzemeler, Millî Mücadele’nin güçlenmesine katkı sağladı. Nezaret içinde kalan milliyetçi subaylar, işgalcilere karşı direnişi desteklemek için bilgi aktarımı ve iletişim kanallarını organize ettiler. Bu süreçte Harbiye Nezareti, işgalci güçler ve Osmanlı yönetiminin kontrolü altındaki bir yapıdan çok, Anadolu’daki bağımsızlık hareketinin bir parçası haline geldi.
+
+Tüm bu gelişmeler, Harbiye Nezareti'nin sadece bir askeri yönetim merkezi olmadığını, aynı zamanda Türk milletinin bağımsızlık mücadelesindeki önemli bir direniş odağı olduğunu göstermektedir. Ancak işgal güçlerinin artan baskısı ve Osmanlı yönetiminin işbirlikçi politikaları, nezaretin resmi işlevini tamamen ortadan kaldırarak, bu kurumun etkisini büyük ölçüde sınırlandırdı.`
+            },
+            {
+                name: "Şehzadebaşı Karakolu",
+                coords: [41.0130, 28.9618],
+                image: "https://imgur.com/2pEmYa4.jpeg",
+                shortText: "Şehzadebaşı Karakolu, İstanbul’un işgal dönemi sırasında sembolik bir öneme sahip oldu. 16 Mart 1920’de İngiliz işgal güçleri, karakolu basarak Türk askerlerini şehit etti. Bu saldırı, İstanbul’un işgalinin resmî başlangıcı olarak kabul edilir. Karakol baskını, halkın işgale karşı tepkisini artırmış ve Millî Mücadele’nin önemini daha da görünür kılmıştır.",
+                longText: `Şehzadebaşı Karakolu, İstanbul’un İngiliz işgali sırasında yaşanan en önemli olaylardan birinin merkezi olarak tarihe geçti. 16 Mart 1920 sabahı, İngiliz işgal güçleri karakola baskın düzenledi. Bu baskın sırasında karakolda bulunan Türk askerleri ağır bir saldırıya maruz kaldı. Baskında 6 Türk askeri şehit oldu, 10’dan fazla asker yaralandı ve karakolda bulunan birçok kişi esir alındı. Bu olay, İstanbul’un resmî olarak işgal edildiğini gösteren en belirgin gelişme olarak kabul edilir.
+
+Karakol baskını, sadece askerî bir saldırı değil, aynı zamanda Türk milletine bir gözdağı verme girişimiydi. İngilizlerin bu sert müdahalesi, halk arasında büyük bir öfke ve tepkiyle karşılandı. Baskın, Millî Mücadele'nin gerekliliğini ve Anadolu’daki bağımsızlık hareketine olan ihtiyacı daha net bir şekilde ortaya koydu. Şehzadebaşı Karakolu baskını sonrası İstanbul’da işgalci güçlere karşı direniş düşüncesi daha da yaygınlaştı ve Anadolu’daki mücadeleye katılım hız kazandı.
+
+Bu olayın ardından İstanbul'da işgal güçlerinin otoritesi artarken, halkın işgale olan tepkisi de aynı ölçüde yükseldi. Şehzadebaşı Karakolu baskını, Mustafa Kemal Atatürk ve silah arkadaşlarının, İstanbul'un işgal altındaki koşullarında dahi Anadolu'daki bağımsızlık hareketini organize etme çabalarının haklılığını kanıtladı. Baskın, Millî Mücadele'nin dönüm noktalarından biri olarak tarihe geçti.`
+            },
+            {
+                name: "Sarayburnu",
+                coords: [41.0167, 28.9861],
+                image: "https://imgur.com/XhzcgDr.jpeg",
+                shortText: "Sarayburnu, İstanbul’un işgal yıllarında hem işgal güçlerinin sembolik varlığını hem de halkın tepkisini simgeleyen bir bölge oldu. İngiliz ve müttefik donanmalarının demirlediği bu bölge, işgalin ilk görüntülerinden birine sahne oldu ve halkın bağımsızlık mücadelesine olan inancını artırdı.",
+                longText: `Sarayburnu, İstanbul’un işgal döneminde stratejik ve sembolik bir öneme sahipti. Müttefik donanmalarının İstanbul’u işgal ettiği dönemde, Sarayburnu’na demirleyen gemiler işgalin en görünür işaretlerinden biriydi. Bu durum, Osmanlı halkı üzerinde derin bir etki bıraktı. İşgal güçleri, bu bölgeyi İstanbul üzerindeki kontrol ve güçlerini göstermek için bir üs olarak kullandı.
+
+Ancak Sarayburnu, aynı zamanda halkın işgale karşı duyduğu tepkinin ve direniş ruhunun sembolü haline geldi. Buradan Anadolu’ya gizlice geçiş yapan kişiler ve gönderilen malzemeler, Millî Mücadele’nin organizasyonunda önemli bir rol oynadı. Sarayburnu, hem işgalin yarattığı karamsarlığı hem de bağımsızlık mücadelesine olan umudu temsil eden bir mekân olarak hatırlanmaktadır.
+
+.`
+            },
+            {
+                name: "Selimiye Kışlası",
+                coords: [41.0057, 29.0123],
+                image: "https://imgur.com/h7iFqCW.jpeg",
+                shortText: "Selimiye Kışlası, İstanbul’un işgali sırasında işgal güçlerinin denetimi altına alınarak Osmanlı askerî sisteminin etkisizleştirilmesi için kullanıldı. Kışla, aynı zamanda birçok askerin tutuklandığı ve sürgüne gönderildiği bir yer olarak bilinir.",
+                longText: `Selimiye Kışlası, İstanbul’un işgali sırasında stratejik bir merkez olarak büyük bir öneme sahipti. İngiliz işgal güçleri, kışlayı kontrol altına alarak Osmanlı ordusunun organizasyon yeteneğini ve direniş kapasitesini büyük ölçüde zayıflattı. Kışlada bulunan Osmanlı askerleri ve subayları, işgal güçleri tarafından tutuklanarak Malta’ya sürgüne gönderildi. Bu süreç, Osmanlı askeri sisteminin çökertilmesinde kritik bir adım olarak görüldü.
+
+Bununla birlikte, Selimiye Kışlası’nda görev yapan bazı subaylar ve askerler, gizli direniş faaliyetlerine katıldılar. Anadolu’daki Millî Mücadele hareketine bilgi ve destek sağlamak için riskli girişimlerde bulundular. Selimiye Kışlası, işgal döneminde Osmanlı askerî tarihinde bir direniş ve mücadele sembolü olarak hatırlanmaktadır.`
+            },
+            {
+                name: "Rami Kütüphanesi",
+                coords: [41.0489, 28.9156],
+                image: "https://imgur.com/vvLNnCL.jpeg",
+                shortText: "Rami Kışlası, İstanbul’un işgali sırasında önemli askeri merkezlerden biriydi. İşgal güçleri, bu kışlayı kontrol altına alarak Osmanlı ordusunun savunma kapasitesini zayıflatmayı hedefledi. Ancak kışlada görev yapan bazı subaylar, gizlice Anadolu’daki Millî Mücadele hareketine destek sağladı.",
+                longText: `Rami Kışlası, İstanbul’un işgal dönemi boyunca hem Osmanlı askeri düzeninin hem de işgal güçlerinin hedeflerinden biri oldu. İşgal güçleri, kışlanın stratejik önemini fark ederek burada kontrol sağlamaya çalıştı. Osmanlı ordusunun savunma ve lojistik merkezi olarak kullanılan kışla, işgal güçlerinin uyguladığı baskılar nedeniyle büyük ölçüde işlevsiz hale getirildi.
+
+Kışladaki Osmanlı askerleri ve subayları, Millî Mücadele’ye destek vermek amacıyla Anadolu’ya bilgi ve malzeme aktarımı konusunda önemli roller üstlendiler. İşgal güçlerinin sıkı denetimine rağmen, kışlada görev yapan bazı vatansever subaylar, Anadolu’daki bağımsızlık hareketine insan gücü ve mühimmat sağlamayı başardı. Rami Kışlası, işgal döneminde hem bir baskı unsuru hem de gizli direniş faaliyetlerinin yürütüldüğü bir merkez olarak tarihe geçti.
+
+`
+            },
+            {
+                name: "Meclis-i Mebusan",
+                coords: [41.0294, 28.9872],
+                image: "https://imgur.com/hJihvHa.jpeg",
+                shortText: "Meclis-i Mebusan, işgal yıllarında Osmanlı halkının temsilcilerinin toplandığı yer olarak tarihi bir önem taşıdı. Ancak 16 Mart 1920’de İstanbul’un işgali ile birlikte İngilizler, meclisi bastı ve birçok milletvekilini tutukladı. Bu olay, Millî Mücadele’nin Anadolu’ya taşınmasının yolunu açtı.",
+                longText: `Meclis-i Mebusan, Osmanlı İmparatorluğu’nun son parlamentosu olarak işgal yıllarında kritik bir rol oynadı. 1920 yılında işgal altındaki İstanbul’da toplanan meclis, Misak-ı Millî kararlarını alarak Türk milletinin bağımsızlık iradesini ortaya koydu. Ancak 16 Mart 1920’de İstanbul’un resmî işgaliyle birlikte İngiliz güçleri, meclisi basarak milletvekillerinin büyük bir kısmını tutukladı ve bazılarını Malta’ya sürgüne gönderdi. Bu baskın, meclisin çalışmalarını tamamen durdurdu.
+
+Meclis-i Mebusan’ın bu şekilde dağıtılması, Türk milletinin bağımsızlık mücadelesi açısından bir dönüm noktası oldu. Mustafa Kemal Atatürk liderliğindeki milliyetçi hareket, meclis üyelerinin Anadolu’ya geçerek Ankara’da Türkiye Büyük Millet Meclisi’ni (TBMM) kurmasına zemin hazırladı. Meclis-i Mebusan’ın aldığı Misak-ı Millî kararları, Millî Mücadele’nin hukuki ve siyasi temelini oluşturdu. Bu olay, Türk bağımsızlık tarihinin en önemli adımlarından biri olarak kabul edilir.
+
+`
+            },
+            { name: "Kadıköy",
+              coords: [40.9901, 29.0271], 
+              image: "https://imgur.com/8Ust4NH.jpeg",
+              shortText: "İstanbul'un işgali sırasında Kadıköy, İtilaf Devletleri'nin kontrolü altına girdi. 13 Kasım 1918'de İngiliz, Fransız, İtalyan ve Amerikan askerleri Kadıköy'e yerleşerek çeşitli noktalarda karakollar kurdular. Bu dönemde, Kadıköy'de işgal kuvvetleriyle Türkler arasında zaman zaman gerginlikler yaşandı. Ayrıca, İspanyol gribi gibi salgın hastalıklar da bölge halkını olumsuz etkiledi.",
+              longText: `İstanbul’un işgali sırasında Kadıköy, stratejik konumu nedeniyle İtilaf Devletleri’nin dikkatini çeken önemli bir bölgeydi. 13 Kasım 1918’de İngiliz, Fransız, İtalyan ve Amerikan askerleri Kadıköy’e yerleşerek çeşitli bölgelerde askeri karakollar kurdular ve liman gibi stratejik noktaları denetim altına aldılar.
+
+Bu dönemde Kadıköy halkı, işgal kuvvetlerinin baskısı altında zor günler geçirdi. Yerel halk ile işgalciler arasında zaman zaman gerginlikler yaşanırken, salgın hastalıklar da bölgeyi etkiledi. Özellikle İspanyol gribi, birçok kişinin hayatını kaybetmesine neden oldu. Kadıköy’de meydana gelen büyük yangınlar ise çarşı ve iskele çevresindeki yapıların yıkılmasına yol açtı ancak bu durum, daha planlı bir yeniden yapılanma sürecini başlattı.
+
+Türk Kurtuluş Savaşı’nın zaferle sonuçlanmasının ardından 6 Ekim 1923’te İstanbul’un kurtuluşuyla Kadıköy de özgürlüğüne kavuştu.` },
+            { name: "Üsküdar", 
+              coords: [41.0257, 29.0158], 
+              image: "https://imgur.com/Dq2qrKg.jpeg", 
+              shortText: "Üsküdar, İstanbul’un işgali sırasında stratejik bir öneme sahipti. Anadolu Yakasının en önemli yerleşim merkezi olan Üsküdar, Boğaziçi'nin Asya tarafındaki bağlantıyı sağlayan konumuyla işgalci güçler için askeri ve lojistik açıdan kritik bir noktaydı. Ayrıca, su kaynakları ve ulaşım altyapısı da işgalin seyrini etkileyen faktörlerdendi.",
+              longText: `İstanbul’un 1918’deki işgali sırasında Üsküdar, coğrafi konumu ve stratejik özellikleriyle kritik bir rol üstlendi. Anadolu Yakasının önemli yerleşim alanlarından biri olan Üsküdar, Boğaziçi'nin Anadolu tarafındaki bağlantıyı sağlayan önemli bir noktaydı. İşgalci güçler, bu konumu avantajlarına kullanarak asker ve malzeme sevkiyatını kolaylaştırdılar.
+
+Ayrıca, Üsküdar’daki su kaynakları da büyük önem taşıdı. İstanbul’un su ihtiyacını karşılayan Üsküdar Kadıköy Su Şirketi, işgal sırasında çoğunlukla Alman sermayesine ait olduğu gerekçesiyle işgalci kuvvetler tarafından ele geçirildi. Bu, ordu ve donanmanın su ihtiyacını karşılarken, halkı fahiş fiyatlarla su almak zorunda bıraktı.
+
+Üsküdar'ın ulaşım altyapısı, işgalci kuvvetlerin asker sevkiyatı için önemli bir rol oynadı. Anadolu Yakasının önemli ulaşım noktalarından biri olan bu bölge, günlük yaşamda zorluklar yaratarak halkın üzerinde büyük bir baskı oluşturdu. İşgalci güçlerin bu stratejik noktaları denetim altına alması, İstanbul’un işgal sürecini derinden etkileyen bir faktördü.
+`},
+            { name: "Haliç Tersanesi", 
+              coords: [41.0415, 28.9468], 
+              image: "https://imgur.com/g1MEw3B.jpeg", 
+              shortText: "İstanbul'un işgali sırasında Haliç Tersanesi, İtilaf Devletleri'nin kontrolüne geçti. İngiliz askerleri tersaneyi ele geçirerek Osmanlı donanmasına ait silah ve mühimmatı Dolmabahçe Sarayı'na taşıdı. Bu durum, Osmanlı denizcilik faaliyetlerini olumsuz etkiledi.",
+              longText: `1455 yılında Fatih Sultan Mehmet tarafından kurulan Haliç Tersanesi, Osmanlı İmparatorluğu’nun en önemli denizcilik merkezlerinden biriydi. İstanbul’un 13 Kasım 1918’de İtilaf Devletleri tarafından işgali sırasında, tersane stratejik önemi nedeniyle İngiliz kuvvetlerinin kontrolüne geçti. İngiliz askerleri, Osmanlı donanmasına ait silah ve mühimmatı Dolmabahçe Sarayı’na taşıdı, bu durum Osmanlı denizcilik gücünü büyük ölçüde zayıflattı.
+
+Tersane işçileri, işgal sırasında milli mücadeleye destek olmak amacıyla aralarında para toplayarak Kurtuluş Savaşı’na katkı sağladılar. İşgal yılları boyunca tersanedeki faaliyetler kısıtlanırken, denizcilik faaliyetleri neredeyse tamamen durma noktasına geldi.
+
+Türk Kurtuluş Savaşı’nın zaferle sonuçlanmasıyla birlikte, 6 Ekim 1923’te İstanbul’un kurtuluşunun ardından Haliç Tersanesi de yeniden Türk kontrolüne geçti. Bugün, Haliç Tersanesi dünyanın hâlâ işleyen en eski tersanesi olarak faaliyetlerini sürdürmektedir.`},
+            { name: "Pendik Tersanesi", 
+              coords: [40.8674, 29.2715], 
+              image: "https://imgur.com/Ijp5m3C.jpeg", 
+              shortText: "Pendik Tersanesi, İstanbul'un işgali sırasında stratejik öneme sahipti. İşgalci güçler, İstanbul'un savunma gücünü zayıflatmak amacıyla askeri tersaneleri kontrol altına almaya çalıştılar. Pendik Tersanesi, denizcilik faaliyetlerini etkileyerek Osmanlı İmparatorluğu'nun askeri gücüne darbe vurdu. Bu süreç, Osmanlı'nın deniz gücünü kaybetmesine neden olan kritik bir dönüm noktasıydı.",
+              longText: `İstanbul'un 1918'deki işgali sırasında Pendik Tersanesi, İstanbul'un deniz savunma kapasitesini zayıflatmak isteyen İtilaf Devletleri için önemli bir hedef haline geldi. 13 Kasım 1918’de başlayan işgalde, işgalci güçler Osmanlı'nın deniz gücünü etkisiz hale getirmek amacıyla denizcilik altyapısına müdahale etmeye başladılar. Pendik Tersanesi, Osmanlı donanmasına ait gemi ve silahların bakımını üstlenmekle birlikte, denizcilik kapasitesinin azalmasıyla bu görevini yerine getirememeye başladı.
+
+İşgal kuvvetleri, bu stratejik tesisi denetim altına alarak hem Osmanlı'nın askeri gücünü sınırladılar hem de Türk ordusunun savaş hazırlıklarını engellediler. Özellikle 1919 ve sonrasındaki yıllarda, Pendik Tersanesi ve çevresindeki diğer denizcilik merkezleri, işgalin yarattığı zorluklar nedeniyle verimli çalışamadı.
+
+Pendik Tersanesi'nin işgalin ilk yıllarındaki durumu, Türk Kurtuluş Savaşı'na kadar uzanan dönemde, Osmanlı'nın deniz gücünü kaybetmesine neden olan önemli bir etken olmuştur.`},
+            { name: "Kabataş İskelesi", 
+              coords: [41.0389, 28.9945], 
+              image: "https://imgur.com/TxUKRKG.jpeg", 
+              shortText: "Kabataş İskelesi, İstanbul’un işgali sırasında stratejik bir öneme sahipti. Hem ulaşım açısından hem de askeri açıdan kritik bir nokta olan Kabataş, işgalci güçler tarafından sıkça kullanıldı. Bu iskele, İstanbul’a gelen yabancı askerlerin geçiş noktası oldu ve bu durum, işgalin izlerini kentte derinleştirdi",
+              longText: `Kabataş İskelesi, İstanbul’un işgali sırasında büyük bir stratejik öneme sahipti. Şehrin önemli ulaşım noktalarından biri olan Kabataş, aynı zamanda askeri anlamda da kritik bir mevkiydi. 1918’deki işgal sırasında, işgalci güçler bu iskeleyi asker ve malzeme sevkiyatı için kullandılar. Hem karadan hem de denizden gelen kuvvetler için bir geçiş noktası olan Kabataş, İstanbul’a gelen yabancı askerlerin ana ulaşım merkezi haline geldi.
+
+Kabataş İskelesi, işgalci güçlerin İstanbul’da gerçekleştirdiği operasyonları kolaylaştırırken, aynı zamanda halkın da işgalin getirdiği zorlukları derinden hissetmesine neden oldu. Yabancı askerlerin yoğunluğu, bölgedeki gerginliği arttırarak işgalin izlerini daha belirgin hale getirdi. Bu iskelenin önemi, sadece askeri değil, aynı zamanda şehrin sosyal ve ekonomik yapısı üzerindeki etkisiyle de İstanbul’un işgal sürecine damgasını vurdu.`},
+            { name: "Galata",
+              coords: [41.0248, 28.9734], 
+              image: "https://imgur.com/r8bksmp.jpeg",
+              shortText: "İstanbul'un işgali sırasında Galata, stratejik bir bölge olarak dikkat çekiyordu. 8 Kasım 1918’de Fransız ve Yunan gemileri Galata Limanı’na yanaşarak işgal başladı. İngiliz askerleri, Galata Kulesi’ni gözetleme noktası olarak kullanarak şehri izliyor, çevredeki binalar karargâh ve istihbarat merkezi olarak işlev görüyordu. İşgal, bölgede günlük yaşamı zorlaştırmış ve çeşitli direniş hareketlerine yol açmıştır.",
+              longText: `İstanbul'un işgali sırasında Galata, hem askeri hem de stratejik açıdan önemli bir bölge haline gelmişti. 8 Kasım 1918'de, Fransız ve Yunan gemilerinin Galata Limanı’na yanaşmasıyla işgal süreci başlamıştı. İngiliz, Fransız ve İtalyan askerleri, bu bölgeyi denetleyerek resmi kurumları ve önemli yapıları kontrol altına aldılar. Galata Kulesi, işgal yıllarında önemli bir gözetleme noktası haline gelmişti; İngiliz askerleri kuleyi şehrin büyük bir kısmını izleyebilecekleri bir gözlem kulesi olarak kullanmışlardı.
+
+Bunun dışında, Galata’daki bazı binalar, işgalci kuvvetlerin karargâhı veya istihbarat merkezi olarak kullanılmıştı. Galata Kulesi'nin yanındaki Galata Evi, İngiliz karakolu olarak işlev görmüş ve burada birçok kişi sorgulanmıştı. İşgal süreci boyunca, Galata'daki askeri varlık halkın günlük yaşamını zorlaştırmış, bölgedeki birçok kişi direniş hareketlerine katılmaya başlamıştır.`
+            },
+            { name: "Sultanahmet",
+              coords: [41.0078, 28.9778], 
+              image: "https://imgur.com/zizUjeo.jpeg",
+              shortText: "İstanbul'un işgali sırasında Sultanahmet, şehrin en önemli bölgelerinden biri haline gelmişti. Sultanahmet Meydanı ve çevresi, işgalci kuvvetler tarafından denetleniyordu. Ayasofya, bir süre depo ve hastane olarak kullanılırken, Sultanahmet Camii de farklı amaçlarla işgalciler tarafından işgal edilmişti. Bölge, askeri geçitler ve yürüyüşlerle etkilenmişti.",
+              longText: `İstanbul'un işgali sırasında Sultanahmet, hem tarihi hem de stratejik olarak önemli bir bölgeydi. Sultanahmet Meydanı, işgal altına alındıktan sonra, hem askeri geçitlerin hem de işgalci kuvvetlerin gösterilerinin yapıldığı bir alan haline geldi. Ayasofya, işgal yıllarında geçici olarak depo ve hastane olarak kullanılmış, önemli bir yapısal değişiklik yaşanmıştı. Sultanahmet Camii de bir süreliğine işgalci kuvvetler tarafından farklı amaçlarla kullanılmak üzere denetlenmişti.
+
+İşgalin etkisiyle, Sultanahmet çevresi günlük yaşamda büyük değişimlere sahne olmuş, halkın yaşamı zorlaşmıştı. Aynı zamanda, bu dönemde çeşitli direniş hareketleri de başlamıştı. Sultanahmet, İstanbul'un tarihi simgelerinin yer aldığı, işgal yıllarının izlerini taşıyan önemli bir bölge olarak kalmıştır.`
+            },
+            { name: "Taksim",
+              coords: [41.0374, 28.9856], 
+              image: "https://imgur.com/3x27zI4.jpeg",
+              shortText: "İstanbul'un işgali sırasında Taksim, işgal kuvvetlerinin yoğun olarak bulunduğu bir bölgeydi. İngiliz askerleri, çevredeki önemli yapıları kontrol altında tutarken, Beyoğlu’nda düzenlenen askeri yürüyüşler bölgedeki işgalci varlığını pekiştiriyordu. Taksim Meydanı, işgal döneminin sembolik noktalarından biri haline gelmişti.",
+              longText: `İstanbul'un işgali sırasında Taksim, işgal kuvvetlerinin stratejik açıdan önemli gördüğü bölgelerden biriydi. İngiliz, Fransız ve İtalyan askerleri, Taksim Meydanı ve çevresinde yoğun olarak bulunarak resmi binaları, askeri noktaları ve önemli yapıları denetim altında tutuyordu. Beyoğlu bölgesinde düzenlenen askeri geçitler ve yürüyüşler, işgalci kuvvetlerin varlığını göstermek ve halkı kontrol altında tutmak amacı taşıyordu.
+
+Taksim Meydanı ve çevresi, hem askeri hem de sivil hareketlilik açısından işgalin merkezlerinden biri olmuştu. Bu süreç, bölgedeki halkın günlük yaşamını zorlaştırırken, aynı zamanda direniş hareketlerinin de filizlendiği bir alan haline gelmişti. İşgal yılları boyunca Taksim, hem sembolik hem de stratejik bir rol oynamıştır.`
+            },
+            { name: "Karaköy",
+              coords: [41.0226, 28.9749], 
+              image: "https://imgur.com/PhJkARJ.jpeg",
+              shortText: "İstanbul'un işgali sırasında Karaköy, İtilaf Devletleri'nin önemli bir askeri merkeziydi. İşgal kuvvetleri, Karaköy Limanı'nı kullanarak asker ve malzeme sevkiyatı yapıyor, bölgedeki stratejik noktaları kontrol ediyorlardı. Bu durum, Karaköy'ü işgalin kritik merkezlerinden biri haline getirdi.",
+              longText: `İstanbul'un işgali sırasında Karaköy, İtilaf Devletleri'nin askeri ve lojistik faaliyetlerinde önemli bir merkezdi. 13 Kasım 1918'de başlayan işgalde Karaköy Limanı, asker ve malzeme sevkiyatında ana giriş noktası olarak kullanıldı. Liman ve çevresi, İngiliz donanması başta olmak üzere işgal kuvvetlerinin kontrolüne geçti.
+
+Karaköy’de yaşayan halk, yabancı askerlerin varlığı ve kısıtlamalar nedeniyle günlük yaşamlarında zorluklar yaşadı. Stratejik noktaların denetim altına alınması, bölgedeki ticari faaliyetleri olumsuz etkiledi. Zaman zaman gerginlikler ve çatışmaların da yaşandığı Karaköy, işgalin baskısını derinden hissetti.
+
+Türk Kurtuluş Savaşı’nın zaferiyle, 6 Ekim 1923’te İstanbul’un kurtuluşunun ardından Karaköy de özgürlüğüne kavuştu.`
+            }
         ];
 
         // Popup İçerikleri
@@ -82,8 +217,7 @@
             return `
                 <div>
                     ${imageContent}
-                    <label for="short-note">Kısa Not:</label><br>
-                    <input type="text" id="short-note" placeholder="Notunuzu yazın"><br><br>
+                    <p>${location.shortText || "Kısa not bulunmamaktadır."}</p>
                     <a href="#" id="more-link">Daha Fazla Göster</a>
                 </div>
             `;
@@ -92,12 +226,9 @@
         function generateLargePopupContent(location) {
             var imageContent = location.image ? `<img src="${location.image}" alt="${location.name}" style="width: 100%; height: auto; border: 1px solid #ccc; margin-bottom: 10px;">` : "";
             return `
-                <div>
+                <div class="large-popup">
                     ${imageContent}
-                    <label for="large-note">Geniş Not Alanı:</label><br>
-                    <textarea id="large-note" class="big-note" placeholder="Daha fazla detay yazın"></textarea><br><br>
-                    <button onclick="alert('Not Kaydedildi!')">Kaydet</button>
-                    <br><br>
+                    <p>${location.longText || "Geniş not bulunmamaktadır."}</p>
                     <a href="#" id="back-link">Geri Gel</a>
                 </div>
             `;
